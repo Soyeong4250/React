@@ -51,31 +51,31 @@ const dummyData = [
     id: 1,
     emotion: 1,
     content: "오늘의 일기 1번",
-    date: 1683072982092,
+    date: 1683382975816,
   },
   {
     id: 2,
     emotion: 2,
     content: "오늘의 일기 2번",
-    date: 1683072982093,
+    date: 1683382975817,
   },
   {
     id: 3,
     emotion: 3,
     content: "오늘의 일기 3번",
-    date: 1683072982094,
+    date: 1683382975818,
   },
   {
     id: 4,
     emotion: 4,
     content: "오늘의 일기 4번",
-    date: 1683072982095,
+    date: 1683382975819,
   },
   {
     id: 5,
     emotion: 5,
     content: "오늘의 일기 5번",
-    date: 1683072982096,
+    date: 1683382975820,
   },
 ];
 
@@ -84,7 +84,7 @@ function App() {
   console.log(new Date().getTime());
   env.PUBLIC_URL = env.PUBLIC_URL || "";
 
-  const [data, dispatch] = useReducer(reducer, [dummyData]);
+  const [data, dispatch] = useReducer(reducer, dummyData);
   const dataId = useRef(0);
 
   // CREATE
