@@ -3,6 +3,7 @@ import { DiaryStateContext } from "../App";
 
 import MyHeader from "./../components/MyHeader";
 import MyButton from "../components/MyButton";
+import DiaryList from "../components/DiaryList";
 
 const Home = () => {
   const diaryList = useContext(DiaryStateContext);
@@ -14,23 +15,25 @@ const Home = () => {
   const headText = `${curDate.getFullYear()}년 ${curDate.getMonth() + 1}월`;
 
   useEffect(() => {
-    const firstDay = new Date(
-      curDate.getFullYear(),
-      curDate.getMonth(),
-      1 // 1일
-    ).getTime();
-    console.log("firstDay = " + new Date(firstDay));
+    // data가 있는 달에만 수행할 수 있도록 조건 설정
+    if (diaryList.length >= 1) {
+      const firstDay = new Date(
+        curDate.getFullYear(),
+        curDate.getMonth(),
+        1 // 1일
+      ).getTime();
+      console.log("firstDay = " + new Date(firstDay));
 
-    const lastDay = new Date(
-      curDate.getFullYear(),
-      curDate.getMonth() + 1,
-      0
-    ).getTime();
-    console.log("lastDay = " + new Date(lastDay));
-
-    setData(
-      diaryList.filter((it) => firstDay <= it.date && it.date <= lastDay)
-    );
+      const lastDay = new Date(
+        curDate.getFullYear(),
+        curDate.getMonth() + 1,
+        0
+      ).getTime();
+      console.log("lastDay = " + new Date(lastDay));
+      setData(
+        diaryList.filter((it) => firstDay <= it.date && it.date <= lastDay)
+      );
+    }
   }, [diaryList, curDate]); // diaryList가 바뀌었을 때 동작하도록 하기 위해 diaryList도 배열에 넣어주어야 함
 
   // 확인
@@ -58,7 +61,7 @@ const Home = () => {
         rightChild={<MyButton text={">"} onClick={increaseMonth} />}
       />
       <h1>Home</h1>
-      <p>이곳은 홈 입니다.</p>
+      <DiaryList diaryList={data}></DiaryList>
     </div>
   );
 };
