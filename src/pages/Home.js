@@ -27,8 +27,11 @@ const Home = () => {
       const lastDay = new Date(
         curDate.getFullYear(),
         curDate.getMonth() + 1,
-        0
-      ).getTime();
+        0,
+        23,
+        59,
+        59
+      ).getTime(); // 시간 분 초까지 제한
       console.log("lastDay = " + new Date(lastDay));
       setData(
         diaryList.filter((it) => firstDay <= it.date && it.date <= lastDay)
