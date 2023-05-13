@@ -58,10 +58,6 @@ const DiaryEditor = ({ isEdit, originData }) => {
     }
   }, [isEdit, originData]);
 
-  useEffect(() => {
-    console.log(getStringDate(new Date(parseInt(originData.date))));
-  });
-
   return (
     <div className="DiaryEditor">
       <MyHeader
@@ -70,7 +66,6 @@ const DiaryEditor = ({ isEdit, originData }) => {
           <MyButton text={"< 뒤로 가기"} onClick={() => navigate(-1)} />
         }
       />
-      <h1>New</h1>
       <div>
         <section>
           <h4>오늘은 언제인가요?</h4>
@@ -78,7 +73,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
             <input
               className="input_date"
               type="date"
-              value={getStringDate(new Date(parseInt(originData.date)))}
+              value={date}
               onChange={(e) => setDate(e.target.value)}
             />
           </div>
