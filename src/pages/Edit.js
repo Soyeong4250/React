@@ -11,6 +11,11 @@ const Edit = () => {
 
   console.log(id);
 
+  useEffect(() => {
+    const titleElement = document.getElementsByTagName("title")[0];
+    titleElement.innerHTML = `감정 일기장 - ${id}번 일기 수정`;
+  }, []);
+
   const diaryList = useContext(DiaryStateContext);
   console.log(diaryList); // 저장되어 있던 일기리스트 가져오기
 

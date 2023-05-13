@@ -12,6 +12,11 @@ const Diary = () => {
   const { id } = useParams();
   console.log("id", id);
 
+  useEffect(() => {
+    const titleElement = document.getElementsByTagName("title")[0];
+    titleElement.innerHTML = `감정 일기장 - ${id}번 일기`;
+  }, []);
+
   const diaryList = useContext(DiaryStateContext); // 저장된 일기 원본 데이터 가져오기
 
   const navigate = useNavigate();

@@ -6,6 +6,11 @@ import MyButton from "../components/MyButton";
 import DiaryList from "../components/DiaryList";
 
 const Home = () => {
+  useEffect(() => {
+    const titleElement = document.getElementsByTagName("title")[0];
+    titleElement.innerHTML = "감정 일기장";
+  }, []);
+
   const diaryList = useContext(DiaryStateContext);
 
   const [data, setData] = useState([]); // 가공된 데이터(날짜 넣기)
