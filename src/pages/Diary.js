@@ -75,8 +75,6 @@ const Diary = () => {
             </div>
           </section>
         </article>
-        {data.id} {data.content} {getStringDate(new Date(parseInt(data.date)))}
-        {data.emotion}
       </div>
     );
   }
