@@ -1,17 +1,13 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import RouteTest from "./components/RouteTest";
-
 import Home from "./pages/Home";
 import New from "./pages/New";
 import Edit from "./pages/Edit";
 import Diary from "./pages/Diary";
 
 // COMPONENETS
-import MyButton from "./components/MyButton";
-import MyHeader from "./components/MyHeader";
-import React, { useReducer, useRef } from "react";
+import React, { useReducer, useRef, useEffect } from "react";
 
 const reducer = (state, action) => {
   let newState = [];
@@ -40,52 +36,33 @@ const reducer = (state, action) => {
       return state;
   }
 
+  localStorage.setItem("diary", JSON.stringify(newState));
+
   return newState;
 };
 
 export const DiaryStateContext = React.createContext();
 export const DiaryDispatchContext = React.createContext();
 
-const dummyData = [
-  {
-    id: 1,
-    emotion: 1,
-    content: "오늘의 일기 1번",
-    date: 1683382975816,
-  },
-  {
-    id: 2,
-    emotion: 2,
-    content: "오늘의 일기 2번",
-    date: 1683382975817,
-  },
-  {
-    id: 3,
-    emotion: 3,
-    content: "오늘의 일기 3번",
-    date: 1683382975818,
-  },
-  {
-    id: 4,
-    emotion: 4,
-    content: "오늘의 일기 4번",
-    date: 1683382975819,
-  },
-  {
-    id: 5,
-    emotion: 5,
-    content: "오늘의 일기 5번",
-    date: 1683382975820,
-  },
-];
-
 function App() {
   const env = process.env;
-  console.log(new Date().getTime());
   env.PUBLIC_URL = env.PUBLIC_URL || "";
+  console.log(new Date().getTime());
 
-  const [data, dispatch] = useReducer(reducer, dummyData);
-  const dataId = useRef(6); // dummyData에 의해 새로운 일기 작성 시 id 6번부터 시작
+  const [data, dispatch] = useReducer(reducer, []);
+  const dataId = useRef(0);
+
+  useEffect(() => {
+    const localData = localStorage.getItem("diary");
+    if (localData) {
+      const diaryList = JSON.parse(localData).sort(
+        (a, b) => parseInt(b.id) - parseInt(a.id)
+      );
+      dataId.current = parseInt(diaryList[0].id) + 1;
+
+      dispatch({ type: "INIT", data: diaryList });
+    }
+  }, []);
 
   // CREATE
   const onCreate = (date, content, emotion) => {
