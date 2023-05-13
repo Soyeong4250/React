@@ -1,4 +1,4 @@
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useContext, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { DiaryDispatchContext } from "./../App.js";
 import { getStringDate } from "../util/Date.js";
@@ -18,9 +18,9 @@ const DiaryEditor = ({ isEdit, originData }) => {
   const [emotion, setEmotion] = useState(3); // 어떤 감정을 선택했는지 저장하는 state
 
   // 감정 클릭 시 state 변경하는 로직
-  const handleClickEmote = (emotion) => {
+  const handleClickEmote = useCallback((emotion) => {
     setEmotion(emotion);
-  };
+  }, []);
 
   // 텍스트 저장을 위한 state
   const [content, setContent] = useState("");
