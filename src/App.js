@@ -85,7 +85,7 @@ function App() {
   env.PUBLIC_URL = env.PUBLIC_URL || "";
 
   const [data, dispatch] = useReducer(reducer, dummyData);
-  const dataId = useRef(0);
+  const dataId = useRef(6); // dummyData에 의해 새로운 일기 작성 시 id 6번부터 시작
 
   // CREATE
   const onCreate = (date, content, emotion) => {
