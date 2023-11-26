@@ -1,21 +1,21 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
 
-import { DiaryStateContext } from "../App.js";
+import { DiaryStateContext } from '../App.js';
 
-import { getStringDate } from "../util/Date.ts";
-import { emotionList } from "../util/Emotion.js";
-import MyHeader from "../components/MyHeader.js";
-import MyButton from "../components/MyButton.js";
+import { getStringDate } from '../util/Date.ts';
+import { emotionList } from '../util/Emotion.ts';
+import MyHeader from '../components/MyHeader.js';
+import MyButton from '../components/MyButton.js';
 
 const Diary = () => {
   const { id } = useParams();
-  console.log("id", id);
+  console.log('id', id);
 
   useEffect(() => {
-    const titleElement = document.getElementsByTagName("title")[0];
+    const titleElement = document.getElementsByTagName('title')[0];
     titleElement.innerHTML = `감정 일기장 - ${id}번 일기`;
-  }, []);
+  }, [id]);
 
   const diaryList = useContext(DiaryStateContext); // 저장된 일기 원본 데이터 가져오기
 
@@ -32,28 +32,28 @@ const Diary = () => {
     if (targetDiary) {
       setData(targetDiary);
     } else {
-      alert("존재하지 않는 일기입니다.");
-      navigate("/", { repalce: true }); // 일기 작성하기를 뒤로가기로 다시 못돌아오게 하기 위해 replace 옵션을 true로 설정
+      alert('존재하지 않는 일기입니다.');
+      navigate('/', { repalce: true }); // 일기 작성하기를 뒤로가기로 다시 못돌아오게 하기 위해 replace 옵션을 true로 설정
     }
-  }, [id, diaryList]);
+  }, [id, diaryList, navigate]);
 
   if (!data) {
-    return <div className="DiaryPage">로딩중입니다😀</div>;
+    return <div className='DiaryPage'>로딩중입니다😀</div>;
   } else {
     const curEmotionData = emotionList.find(
       (it) => parseInt(it.emotion_id) === parseInt(data.emotion)
     );
-    console.log("curEmotionData", curEmotionData);
+    console.log('curEmotionData', curEmotionData);
     return (
-      <div className="DiaryPage">
+      <div className='DiaryPage'>
         <MyHeader
           headText={`${getStringDate(new Date(parseInt(data.date)))} 기록`}
           leftChild={
-            <MyButton text={"< 뒤로가기"} onClick={() => navigate(-1)} />
+            <MyButton text={'< 뒤로가기'} onClick={() => navigate(-1)} />
           }
           rightChild={
             <MyButton
-              text={"수정하기"}
+              text={'수정하기'}
               onClick={() => navigate(`/edit/${data.id}`)}
             />
           }
@@ -63,19 +63,19 @@ const Diary = () => {
             <h4>오늘의 감정</h4>
             <div
               className={[
-                "diary_img_wrapper",
+                'diary_img_wrapper',
                 `diary_img_wrapper_${curEmotionData.emotion_id}`,
-              ].join(" ")}
+              ].join(' ')}
             >
-              <img src={curEmotionData.emotion_img} />
-              <div className="emotion_descript">
+              <img src={curEmotionData.emotion_img} alt='감정이미지' />
+              <div className='emotion_descript'>
                 {curEmotionData.emotion_descript}
               </div>
             </div>
           </section>
           <section>
             <h4>오늘의 일기</h4>
-            <div className="diary_content_wrapper">
+            <div className='diary_content_wrapper'>
               <p>{data.content}</p>
             </div>
           </section>

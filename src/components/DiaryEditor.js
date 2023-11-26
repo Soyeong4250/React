@@ -2,7 +2,7 @@ import { useState, useRef, useContext, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DiaryDispatchContext } from './../App.js';
 import { getStringDate } from '../util/Date.ts';
-import { emotionList } from '../util/Emotion.js';
+import { emotionList } from '../util/Emotion.ts';
 
 import MyHeader from './MyHeader';
 import MyButton from './MyButton';
