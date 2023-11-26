@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 
 import { DiaryStateContext } from "../App.js";
 
-import { getStringDate } from "../util/Date.js";
+import { getStringDate } from "../util/Date.ts";
 import { emotionList } from "../util/Emotion.js";
 import MyHeader from "../components/MyHeader.js";
 import MyButton from "../components/MyButton.js";

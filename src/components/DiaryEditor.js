@@ -1,13 +1,13 @@
-import { useState, useRef, useContext, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
-import { DiaryDispatchContext } from "./../App.js";
-import { getStringDate } from "../util/Date.js";
-import { emotionList } from "../util/Emotion.js";
+import { useState, useRef, useContext, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { DiaryDispatchContext } from './../App.js';
+import { getStringDate } from '../util/Date.ts';
+import { emotionList } from '../util/Emotion.js';
 
-import MyHeader from "./MyHeader";
-import MyButton from "./MyButton";
-import EmotionItem from "./EmotionItem";
-import { useEffect } from "react";
+import MyHeader from './MyHeader';
+import MyButton from './MyButton';
+import EmotionItem from './EmotionItem';
+import { useEffect } from 'react';
 
 const DiaryEditor = ({ isEdit, originData }) => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
   }, []);
 
   // 텍스트 저장을 위한 state
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState('');
   // 공란인 상태로 다음 단계로 넘어가고자 할 때 포커스를 위한 레퍼런스
   const contentRef = useRef();
 
@@ -37,7 +37,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
 
     if (
       window.confirm(
-        isEdit ? "일기를 수정하시겠습니까?" : "새로운 일기를 작성하시겠습니까?"
+        isEdit ? '일기를 수정하시겠습니까?' : '새로운 일기를 작성하시겠습니까?'
       )
     ) {
       if (!isEdit) {
@@ -46,14 +46,14 @@ const DiaryEditor = ({ isEdit, originData }) => {
         onEdit(originData.id, date, content, emotion);
       }
     }
-    navigate("/", { replace: true }); // 일기 작성하기를 뒤로가기로 다시 못돌아오게 하기 위해 replace 옵션을 true로 설정
+    navigate('/', { replace: true }); // 일기 작성하기를 뒤로가기로 다시 못돌아오게 하기 위해 replace 옵션을 true로 설정
   };
 
   // 삭제
   const handleRemove = () => {
     if (window.confirm(`${originData.id}번 일기를 정말 삭제하시겠습니까?`)) {
       onRemove(originData.id);
-      navigate("/", { replace: true });
+      navigate('/', { replace: true });
     }
   };
 
@@ -67,31 +67,31 @@ const DiaryEditor = ({ isEdit, originData }) => {
   }, [isEdit, originData]);
 
   return (
-    <div className="DiaryEditor">
+    <div className='DiaryEditor'>
       <MyHeader
-        headText={isEdit ? "일기 수정하기" : "새 일기 쓰기"}
+        headText={isEdit ? '일기 수정하기' : '새 일기 쓰기'}
         leftChild={
-          <MyButton text={"< 뒤로 가기"} onClick={() => navigate(-1)} />
+          <MyButton text={'< 뒤로 가기'} onClick={() => navigate(-1)} />
         }
         rightChild={
           isEdit ? (
             <MyButton
-              text={"삭제하기"}
-              type={"negative"}
+              text={'삭제하기'}
+              type={'negative'}
               onClick={handleRemove}
             />
           ) : (
-            ""
+            ''
           )
         }
       />
       <div>
         <section>
           <h4>오늘은 언제인가요?</h4>
-          <div className="input_box">
+          <div className='input_box'>
             <input
-              className="input_date"
-              type="date"
+              className='input_date'
+              type='date'
               value={date}
               onChange={(e) => setDate(e.target.value)}
             />
@@ -99,7 +99,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
         </section>
         <section>
           <h4>오늘의 감정</h4>
-          <div className="input_box emotion_list_wrapper">
+          <div className='input_box emotion_list_wrapper'>
             {emotionList.map((it) => (
               // <div key={it.emotion_id}>{it.emotion_descript}</div>
               <EmotionItem
@@ -113,9 +113,9 @@ const DiaryEditor = ({ isEdit, originData }) => {
         </section>
         <section>
           <h4>오늘의 일기</h4>
-          <div className="input_box text_wrapper">
+          <div className='input_box text_wrapper'>
             <textarea
-              placeholder="오늘은 어땠나요?"
+              placeholder='오늘은 어땠나요?'
               ref={contentRef}
               value={content}
               onChange={(e) => setContent(e.target.value)}
@@ -123,16 +123,16 @@ const DiaryEditor = ({ isEdit, originData }) => {
           </div>
         </section>
         <section>
-          <div className="control_box">
+          <div className='control_box'>
             <MyButton
-              text={"취소하기"}
+              text={'취소하기'}
               onClick={() => {
                 navigate(-1);
               }}
             />
             <MyButton
-              text={"작성완료"}
-              type={"positive"}
+              text={'작성완료'}
+              type={'positive'}
               onClick={handleSubmit}
             />
           </div>
