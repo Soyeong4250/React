@@ -1,12 +1,12 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 
-import { DiaryStateContext } from '../App.js';
+import { DiaryStateContext } from '../App.jsx';
 
 import { getStringDate } from '../util/Date.ts';
 import { emotionList } from '../util/Emotion.ts';
-import MyHeader from '../components/MyHeader.js';
-import MyButton from '../components/MyButton.js';
+import MyHeader from '../components/MyHeader.jsx';
+import MyButton from '../components/MyButton.jsx';
 
 const Diary = () => {
   const { id } = useParams();

@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { DiaryStateContext } from "../App.js";
+import { DiaryStateContext } from "../App.jsx";
 
-import DiaryEditor from "../components/DiaryEditor.js";
+import DiaryEditor from "../components/DiaryEditor.jsx";
 
 const Edit = () => {
   const [originData, setOriginData] = useState();
@@ -14,7 +14,7 @@ const Edit = () => {
   useEffect(() => {
     const titleElement = document.getElementsByTagName("title")[0];
     titleElement.innerHTML = `감정 일기장 - ${id}번 일기 수정`;
-  }, []);
+  }, [id]);
 
   const diaryList = useContext(DiaryStateContext);
   console.log(diaryList); // 저장되어 있던 일기리스트 가져오기
@@ -31,7 +31,7 @@ const Edit = () => {
       // undefined일 경우 (targetDiary가 없을 때)
       navigate("/", { replace: true });
     }
-  }, [id, diaryList]); // id또는 diaryList갸 변하면 데이터 다시 가져오기
+  }, [id, diaryList, navigate]); // id또는 diaryList갸 변하면 데이터 다시 가져오기
   return (
     <div>
       {originData && <DiaryEditor isEdit={true} originData={originData} />}

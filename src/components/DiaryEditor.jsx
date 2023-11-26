@@ -1,12 +1,12 @@
 import { useState, useRef, useContext, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { DiaryDispatchContext } from './../App.js';
+import { DiaryDispatchContext } from '../App.jsx';
 import { getStringDate } from '../util/Date.ts';
 import { emotionList } from '../util/Emotion.ts';
 
-import MyHeader from './MyHeader';
-import MyButton from './MyButton';
-import EmotionItem from './EmotionItem';
+import MyHeader from './MyHeader.jsx';
+import MyButton from './MyButton.jsx';
+import EmotionItem from './EmotionItem.jsx';
 import { useEffect } from 'react';
 
 const DiaryEditor = ({ isEdit, originData }) => {
