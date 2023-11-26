@@ -11,11 +11,11 @@ body {
 }
 
 /* 650px이상일 때에만 해당 CSS 적용됨 (반응형 웹을 만드는 것을 도와줌) */
-@media (min-width: 650px) {
+/* @media (min-width: 650px) {
   .App {
     background-color: black;
   }
-}
+} */
 
 @media (max-width: 650px) {
   .App {
